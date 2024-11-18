@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "866194027137",
+    "project_id": "fidelyo-fbf87",
+    "storage_bucket": "fidelyo-fbf87.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866194027137:android:da35431678af6b00401380",
+        "android_client_info": {
+          "package_name": "com.example.fidelyo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8O4utsIrcB6Tzw5oaUdEsd0zwHXUBYl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
