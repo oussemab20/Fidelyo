@@ -44,6 +44,11 @@ dependencies:
   http: ^1.2.2
   google_sign_in: ^6.2.2
   awesome_dialog: ^3.2.1
+  cloud_functions: ^5.1.5
+  image_picker: ^1.1.2
+  cloudinary: ^1.2.0
+  cloudinary_sdk: ^5.0.0+1
+  image_cropper: ^8.0.2
 
 dev_dependencies:
   flutter_test:

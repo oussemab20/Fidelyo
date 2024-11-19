@@ -38,8 +38,7 @@ class _HomePageState extends State<HomePage> {
               // First Container
               GestureDetector(
                 onTap: () {
-                  // Add the action you want on tap here
-                  print("Tapped on Account Management");
+                  Navigator.of(context).pushNamed('/addstore');
                 },
                 child: Container(
                   width: double.infinity,

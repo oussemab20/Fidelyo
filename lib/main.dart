@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'Components/logo.dart';
 import 'ForgetPassword.dart';
+import 'Store/AddStore.dart';
 import 'app_colors.dart';
 import 'login.dart';
 
@@ -48,6 +49,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => Login(),
         '/homepage': (context) => HomePage(),
         '/forgetpassword': (context) => Forgetpassword(),
+        '/addstore': (context) => Addstore(),
       },
     );
   }
