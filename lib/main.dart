@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 
 import 'Components/logo.dart';
 import 'ForgetPassword.dart';
+import 'Store/AddOffers.dart';
 import 'Store/AddStore.dart';
+import 'Store/EditOffers.dart';
+import 'Store/UpdateStore.dart';
 import 'app_colors.dart';
 import 'login.dart';
 
@@ -50,6 +53,9 @@ class _MyAppState extends State<MyApp> {
         '/homepage': (context) => HomePage(),
         '/forgetpassword': (context) => Forgetpassword(),
         '/addstore': (context) => Addstore(),
+        '/updatestore': (context) => Updatestore(),
+        'addoffers': (context) => Addoffers(shopUid: '',),
+        'editoffers': (context) => Editoffers(offerId: '',),
       },
     );
   }

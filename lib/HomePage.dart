@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              " ACCOUNT MANAGEMENT",
+                              " ADD SHOP",
                               style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 4),
@@ -100,8 +100,70 @@ class _HomePageState extends State<HomePage> {
               // Second Container
               GestureDetector(
                 onTap: () {
+                  Navigator.of(context).pushNamed('/updatestore');
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 130,
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF4E0189),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              " MODIFY SHOP",
+                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF5F06A0),
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.arrow_circle_right_outlined, color: Colors.white, size: 28),
+                                      SizedBox(width: 4),
+                                      Text("Shop", style: TextStyle(color: Colors.white, fontSize: 16)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.storefront, color: Colors.white, size: 44),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+
+              // Third Container
+              GestureDetector(
+                onTap: () {
                   // Add the action you want on tap here
-                  print("Tapped on Client Management");
+                  print("Tapped on Traffic Management");
                 },
                 child: Container(
                   width: double.infinity,
@@ -151,69 +213,6 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.person_add_alt_1_outlined, color: Colors.white, size: 44),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-
-              // Third Container
-              GestureDetector(
-                onTap: () {
-                  // Add the action you want on tap here
-                  print("Tapped on Traffic Management");
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 130,
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF4E0189),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              " TRAFFIC MANAGEMENT",
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF5F06A0),
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.arrow_circle_right_outlined, color: Colors.white, size: 28),
-                                      SizedBox(width: 4),
-                                      Text("Details", style: TextStyle(color: Colors.white, fontSize: 16)),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.monetization_on_outlined, color: Colors.white, size: 44),
                           ],
                         ),
                       ),
