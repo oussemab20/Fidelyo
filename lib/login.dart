@@ -60,14 +60,14 @@ GlobalKey<FormState> formState =GlobalKey<FormState>();
               child: Column(
               children: [
                 CustomLogo(),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       '  Hi, Welcome Back 👋',
                       style: TextStyle(
-                        fontSize: 36,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -194,32 +194,10 @@ GlobalKey<FormState> formState =GlobalKey<FormState>();
                         ],
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
 
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.grey, width: 2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                      ),
-                      child: const Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.facebook, color: Colors.black),
-                          SizedBox(width: 20),
-                          Text(
-                            'Facebook',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

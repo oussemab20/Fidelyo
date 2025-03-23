@@ -15,17 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('disconnect'),
-        actions: [
-          IconButton(onPressed: () async {
-            GoogleSignIn googleSignIN = GoogleSignIn();
-            googleSignIN.disconnect();
-            await FirebaseAuth.instance.signOut();
-            Navigator.of(context).pushNamed("/login");
-          }, icon: Icon(Icons.logout)),
-        ],
-      ),
+
       backgroundColor: Colors.white,
       body: SafeArea(child: SingleChildScrollView(
         child: Padding(
@@ -58,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               " ADD SHOP",
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 4),
                             Row(
@@ -120,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               " MODIFY SHOP",
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 4),
                             Row(
@@ -162,8 +152,7 @@ class _HomePageState extends State<HomePage> {
               // Third Container
               GestureDetector(
                 onTap: () {
-                  // Add the action you want on tap here
-                  print("Tapped on Traffic Management");
+                  Navigator.of(context).pushNamed('/Clientmanagement');
                 },
                 child: Container(
                   width: double.infinity,
@@ -183,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               " CLIENT MANAGEMENT",
-                              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 4),
                             Row(
@@ -221,12 +210,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 20),
-
-              // Fourth Container
               GestureDetector(
-                onTap: () {
-                  // Add the action you want on tap here
-                  print("Tapped on Subscription Management");
+                onTap: ()  {
+                  Navigator.of(context).pushNamed('/QRCodeScannerPage');
                 },
                 child: Container(
                   width: double.infinity,
@@ -245,8 +231,8 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "SUBSCRIPTION MANAGEMENT",
-                              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                              " Payment ",
+                              style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: 4),
                             Row(
@@ -261,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Icon(Icons.arrow_circle_right_outlined, color: Colors.white, size: 28),
                                       SizedBox(width: 4),
-                                      Text("Details", style: TextStyle(color: Colors.white, fontSize: 16)),
+                                      Text("Scann QR", style: TextStyle(color: Colors.white, fontSize: 16)),
                                     ],
                                   ),
                                 ),
@@ -275,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.subscriptions, color: Colors.white, size: 44),
+                            Icon(Icons.qr_code_scanner, color: Colors.white, size: 44),
                           ],
                         ),
                       ),
@@ -283,6 +269,72 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () async {
+                  GoogleSignIn googleSignIN = GoogleSignIn();
+                  googleSignIN.disconnect();
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamed("/login");
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 130,
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF000000),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              " DISCONNECT ",
+                              style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFFFFFFF),
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.arrow_circle_right_outlined, color: Colors.black, size: 28),
+                                      SizedBox(width: 4),
+                                      Text("Log Out", style: TextStyle(color: Colors.black, fontSize: 16)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.logout, color: Colors.white, size: 44),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Fourth Container
+
+
 
             ],
           ),

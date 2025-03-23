@@ -5,10 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'PaymentScreen.dart';
 import 'Components/logo.dart';
 import 'ForgetPassword.dart';
+
+import 'PaymentScreen.dart';
+import 'QRCodeScannerPage.dart';
 import 'Store/AddOffers.dart';
 import 'Store/AddStore.dart';
+
+import 'Store/ClientManagement.dart';
 import 'Store/EditOffers.dart';
 import 'Store/UpdateStore.dart';
 import 'app_colors.dart';
@@ -45,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: (FirebaseAuth.instance.currentUser != null &&
               FirebaseAuth.instance.currentUser!.emailVerified) ?HomePage() : Login(),
       routes: {
@@ -56,104 +63,15 @@ class _MyAppState extends State<MyApp> {
         '/updatestore': (context) => Updatestore(),
         'addoffers': (context) => Addoffers(shopUid: '',),
         'editoffers': (context) => Editoffers(offerId: '',),
+        '/Clientmanagement': (context) => Clientmanagement(),
+        '/QRCodeScannerPage': (context) => QRCodeScannerPage(),
+        '/PaymentScreen': (context) => PaymentScreen(cardID: '',),
+
+
+
       },
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.only(top: 30, right: 30, left: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 20),
-                CustomLogo(),
-                SizedBox(height: 50),
-                Text(
-                  'Welcome !',
-                  style: TextStyle(
-                    fontSize: 38,
-                    color: Color(0xFF341355),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Please select whether you are a '
-                      'customer, shop owner, or app '
-                      'administrator',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFF4E0189),
-                  ),
-                ),
-                SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(380, 90),
-                    backgroundColor: Color(0xFF341355),
-                  ),
-                  child: Text(
-                    'CUSTOMER',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(380, 90),
-                    backgroundColor: Color(0xFF4E0189),
-                  ),
-                  child: Text(
-                    'SHOP OWNER',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(380, 90),
-                    backgroundColor: Color(0xFF4E0189),
-                  ),
-                  child: Text(
-                    'ADMINISTRATOR',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            CustombuttonAuth(
-              Title: "Next ",
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, "/login");
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+

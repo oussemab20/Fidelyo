@@ -221,8 +221,15 @@ class _AddoffersState extends State<Addoffers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Offer"),
-        backgroundColor: AppColors.textPrimary, // Replace with your desired hex color value
+        title: Text(
+          "Add A Offer",
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Bold text
+            color: Colors.purple, // Purple text color
+          ),
+        ),
+        centerTitle:true,
+        backgroundColor: Colors.white, // Replace with your desired hex color value
       ),
       body: SingleChildScrollView(
         child: Form(

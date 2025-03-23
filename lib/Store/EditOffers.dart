@@ -126,8 +126,15 @@ class _EditoffersState extends State<Editoffers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Offer"),
-        backgroundColor: AppColors.textPrimary,
+        title: Text(
+          "Edit Offer",
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Bold text
+            color: Colors.purple, // Purple text color
+          ),
+        ),
+        centerTitle:true,
+        backgroundColor: Colors.white, // Replace with your desired hex color value
       ),
       body: SingleChildScrollView(
         child: Form(

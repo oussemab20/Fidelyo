@@ -27,26 +27,28 @@ class _RegisterState extends State<Register> {
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  Future<void> addUser() {
-    // Get the current user's UID from FirebaseAuth
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+  Future<void> addShop() async {
+    try {
+      // Get the current user's UID from FirebaseAuth
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      print("User UID: $uid"); // Debug: Check if UID is valid
 
-    // Call the user's CollectionReference to add a new user
-    return users
-        .doc(uid) // Use the UID as the document ID
-        .set({
-      'full_name': name.text,
-      'email': email.text,
-      'address': address.text,
-      'location': location.text,
-      'zipcode': zipcode.text,
-      'created_at': FieldValue.serverTimestamp(), // Optionally add a timestamp
-    })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+      // Call the users collection to add a new shop
+      await users.doc(uid).set({
+        'full_name': name.text,
+        'email': email.text,
+        'address': address.text,
+        'location': location.text,
+        'zipcode': zipcode.text,
+        'created_at': FieldValue.serverTimestamp(),
+        'role': 'shop', // Automatically set role as 'shop'
+      });
+
+      print("Shop added to Firestore"); // Debug: Confirm the data is being saved
+    } catch (error) {
+      print("Error adding shop to Firestore: $error"); // Debug: Log any errors
+    }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,6 @@ class _RegisterState extends State<Register> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
-
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -77,7 +78,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 10),
                   CustomTextForm(hinttext: "Enter your Name", mycontroller: name, validator: (val){
                     if (val == ""){
-                      return "Fill Your Filds" ;
+                      return "Fill Your Fields";
                     }
                   }),
                   SizedBox(height: 10),
@@ -95,9 +96,9 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 10),
                   CustomTextForm(hinttext: "Enter your Email", mycontroller: email, validator: (val){
                     if (val == ""){
-                      return "Fill Your Filds" ;
+                      return "Fill Your Fields";
                     }
-                  },),
+                  }),
                   SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -113,9 +114,9 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 10),
                   CustomTextForm(hinttext: "Enter your Address", mycontroller: address,validator: (val){
                     if (val == ""){
-                      return "Fill Your Filds" ;
+                      return "Fill Your Fields";
                     }
-                  },),
+                  }),
                   SizedBox(height: 10),
                   Row(
                     children: [
@@ -154,17 +155,17 @@ class _RegisterState extends State<Register> {
                       Expanded(
                         child: CustomTextForm(hinttext: "", mycontroller: zipcode,validator: (val){
                           if (val == ""){
-                            return "Fill Your Filds" ;
+                            return "Fill Your Fields";
                           }
-                        },),
+                        }),
                       ),
                       SizedBox(width: 10), // Add spacing between the fields if needed
                       Expanded(
                         child: CustomTextForm(hinttext: "", mycontroller: location,validator: (val){
                           if (val == ""){
-                            return "Fill Your Filds" ;
+                            return "Fill Your Fields";
                           }
-                        },),
+                        }),
                       ),
                     ],
                   ),
@@ -183,7 +184,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 10),
                   CustomTextForm(hinttext: "Enter your Password", mycontroller: password, obscureText: true, validator: (val){
                     if (val == ""){
-                      return "Fill Your Filds" ;
+                      return "Fill Your Fields";
                     }
                   }),
                   SizedBox(height: 10),
@@ -201,7 +202,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 10),
                   CustomTextForm(hinttext: "Confirm your Password", mycontroller: confirmPassword, obscureText: true, validator: (val){
                     if (val == ""){
-                      return "Fill Your Filds" ;
+                      return "Fill Your Fields";
                     }
                   }),
                   SizedBox(height: 120),
@@ -220,8 +221,8 @@ class _RegisterState extends State<Register> {
                         );
                         FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
-                        // Add user details to Firestore after successful registration
-                        await addUser();
+                        // Add shop details to Firestore after successful registration
+                        await addShop(); // Save the shop data with 'role: shop'
 
                         Navigator.of(context).pushReplacementNamed("/login");
                       } on FirebaseAuthException catch (e) {
@@ -245,7 +246,6 @@ class _RegisterState extends State<Register> {
                       }
                     },
                   )
-
                 ],
               ),
             ),

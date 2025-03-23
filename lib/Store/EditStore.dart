@@ -45,7 +45,51 @@ class _EditStoreState extends State<EditStore> {
     super.initState();
     _loadStoreData();
   }
+  Future<void> deleteStore() async {
+    bool confirm = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Delete Store"),
+        content: Text("Are you sure you want to delete this store? This action cannot be undone."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text("Delete", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
 
+    if (!confirm) return;
+
+    try {
+      // Suppression des images de Cloudinary
+      if (_shopImageUrl.isNotEmpty) {
+        await cloudinary.deleteResource(publicId: _shopImageUrl.split('/').last.split('.').first);
+      }
+      if (_logoImageUrl.isNotEmpty) {
+        await cloudinary.deleteResource(publicId: _logoImageUrl.split('/').last.split('.').first);
+      }
+
+      // Suppression du magasin de Firestore
+      await shops.doc(widget.storeId).delete();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Store deleted successfully!")),
+      );
+
+      // Retour à l'écran précédent
+      Navigator.of(context).pop();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to delete store: $e")),
+      );
+    }
+  }
   Future<void> _loadStoreData() async {
     try {
       final storeSnapshot = await shops.doc(widget.storeId).get();
@@ -147,8 +191,15 @@ class _EditStoreState extends State<EditStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Store"),
-        backgroundColor: AppColors.textPrimary,
+        title: Text(
+          "Edit Store",
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Bold text
+            color: Colors.purple, // Purple text color
+          ),
+        ),
+        centerTitle:true,
+        backgroundColor: Colors.white, // Replace with your desired hex color value
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -266,20 +317,29 @@ class _EditStoreState extends State<EditStore> {
                 ),
               ),
               // Button to navigate to Edit Offers
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navigate to EditOffers page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Editoffers(offerId: '',), // Pass the offerId as needed
-                      ),
-                    );
-                  },
-                  child: Text("Edit Offers"),
-                ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Editoffers(offerId: ''),
+                        ),
+                      );
+                    },
+                    child: Text("Edit Offers"),
+                  ),
+                  TextButton(
+                    onPressed: deleteStore,
+                    child: Text(
+                      "Delete the Shop",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ],
               ),
               // Update button
               Padding(

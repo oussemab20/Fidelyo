@@ -11,3 +11,4 @@ class CustomLogo extends StatelessWidget {
     );
   }
 }
+

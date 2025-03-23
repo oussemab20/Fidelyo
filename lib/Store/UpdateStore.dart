@@ -45,8 +45,15 @@ class _UpdatestoreState extends State<Updatestore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Modify Shop"),
-        backgroundColor: AppColors.textPrimary,
+        title: Text(
+          "Update Store",
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Bold text
+            color: Colors.purple, // Purple text color
+          ),
+        ),
+        centerTitle:true,
+        backgroundColor: Colors.white, // Replace with your desired hex color value
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

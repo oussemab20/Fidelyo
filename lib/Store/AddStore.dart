@@ -72,8 +72,12 @@ class _AddstoreState extends State<Addstore> {
         final shopImageUrl = shopImageResponse.secureUrl!;
         final logoImageUrl = logoImageResponse.secureUrl!;
 
-        // Add shop details to Firestore, including the owner's UID
-        final shopDoc = await shops.add({
+        // Create the shop UID (use the current Firestore document ID as the shop UID)
+        final shopUid = FirebaseFirestore.instance.collection('shops').doc().id;
+
+        // Add shop details to Firestore, including the owner UID and shopUid
+        final shopDoc = await shops.doc(shopUid).set({
+          "shopUid": shopUid,  // Use the same shopUid for the document ID
           "name": name.text,
           "shopImage": shopImageUrl,
           "logo": logoImageUrl,
@@ -87,11 +91,11 @@ class _AddstoreState extends State<Addstore> {
           SnackBar(content: Text("Shop added successfully!")),
         );
 
-        // Navigate to Addoffers page and pass the shopId
+        // Navigate to Addoffers page and pass the shopUid
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Addoffers(shopUid: shopDoc.id), // Pass shop ID
+            builder: (context) => Addoffers(shopUid: shopUid), // Pass shopUid
           ),
         );
 
@@ -115,6 +119,7 @@ class _AddstoreState extends State<Addstore> {
       );
     }
   }
+
 
   void _onBrowseShopImage() async {
     final picker = ImagePicker();
@@ -186,8 +191,15 @@ class _AddstoreState extends State<Addstore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add A Shop"),
-        backgroundColor: AppColors.textPrimary, // Replace with your desired hex color value
+        title: Text(
+          "Add A Shop",
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Bold text
+            color: Colors.purple, // Purple text color
+          ),
+        ),
+        centerTitle:true,
+        backgroundColor: Colors.white, // Replace with your desired hex color value
       ),
       body: SingleChildScrollView(
         child: Form(
